@@ -29,3 +29,4 @@ if color_select:
     BONUS: {color_df['UPSELL_PRODUCT_DESC'].values[0]}
     """)
 
+st.stop()
