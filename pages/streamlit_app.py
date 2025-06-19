@@ -7,18 +7,32 @@ session = cnx.session()
 # smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
 
 # Write directly to the app
-st.title(":cup_with_straw: Customize Your Smoothie! :cup_with_straw:")
-st.write(
-  "Choose the fruits you want in your custom Smoothie!"
-)
+st.title("Zena's Amazing Athleisure Catalog")
+# st.write(
+#   "Pick a sweatsuit color or style"
+# )
 
-name_on_order = st.text_input("Name on Smoothie:", max_chars=100)
-st.write("The name on your smoothie will be: ", name_on_order)
+sweatsuit_color = st.text_input("Pick a sweatsuit color or style", max_chars=100)
+prod_table = session.table("zenas_athleisure_db.products.catalog_for_website")#.select(col(''), col('search_on'))) 
+# session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'), col('search_on'))
 
-st.image(image="https://sfc-prod3-ds1-86-customer-stage.s3.us-west-2.amazonaws.com/yoqz0000-s/stages/401f527e-4e80-44f4-bf6d-a94bb7c42d54/navy_blue_sweatsuit.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUIZLYB2N3S7XF256%2F20250619%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20250619T170038Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=dafe48a12a73e8472015feffd919bd7f0c87b487a9ec4d300b641814123ae63c")
+# TODO: create dataframe and pandas frame that can be used to extract the table catalog_for_website
+
+pd_df = prod_table.to_pandas()
+if sweatsuit_color:
+    search_on = pd_df.loc[pd_df['color_or_style'] == sweatsuit_color, 'file_name'].iloc[0]
+    st.write(f'The search value {sweatsuit_color} is {search_on}')
+
+
+# TODO: Create input box to search for colors at catalog_for_website.color_or_style
+#TODO: Based off search results, show the first image that returns
+#TODO Based off search print text of :show price, sizes available, & BONUS(?)
+
+
+
+# st.image(image="https://sfc-prod3-ds1-86-customer-stage.s3.us-west-2.amazonaws.com/yoqz0000-s/stages/401f527e-4e80-44f4-bf6d-a94bb7c42d54/navy_blue_sweatsuit.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUIZLYB2N3S7XF256%2F20250619%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20250619T170038Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=dafe48a12a73e8472015feffd919bd7f0c87b487a9ec4d300b641814123ae63c")
 # my_dataframe = st.dataframe("zenas_athleisure_db.products.catalog_for_website") #.select(col('FRUIT_NAME'), col('search_on'))
 
-# pd_df = my_dataframe.to_pandas()
 # st.dataframe(pd_df)
 st.stop()
 #
@@ -48,8 +62,8 @@ st.stop()
 # # st.stop()
 #     # st.write(ingredients_string)
 # #
-#     my_insert_stmt = """ insert into smoothies.public.orders(ingredients, name_on_order)
-#             values ('""" + ingredients_string + """', '""" + name_on_order + """')"""
+#     my_insert_stmt = """ insert into smoothies.public.orders(ingredients, sweatsuit_color)
+#             values ('""" + ingredients_string + """', '""" + sweatsuit_color + """')"""
 #
 #     # st.write(my_insert_stmt)
 #     ###
@@ -57,5 +71,5 @@ st.stop()
 #     if time_to_insert:
 #         session.sql(my_insert_stmt).collect()
 #
-#         st.success(f"Your Smoothie is ordered, {name_on_order}!", icon="✅")
+#         st.success(f"Your Smoothie is ordered, {sweatsuit_color}!", icon="✅")
 
