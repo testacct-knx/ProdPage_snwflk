@@ -13,6 +13,8 @@ st.title("Zena's Amazing Athleisure Catalog")
 prod_table = session.table("zenas_athleisure_db.products.catalog_for_website")#.select(col('color_or_style'), col('file_name')) 
 color_select = st.selectbox("Pick a sweatsuit color or style", prod_table.select(col('color_or_style')))
 
+# Currently app has problems switching colors for all of them, unknown why but may be the way streamlit is caching and pulling data.
+# Improvment idea: Convert the dataframe converstion to pandas INTO a sql select statement and pull the values from that table
 if color_select:
     # Create dataframe, select color, return results
     pd_df = prod_table.to_pandas()
