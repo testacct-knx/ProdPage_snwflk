@@ -15,9 +15,9 @@ st.write(
 name_on_order = st.text_input("Name on Smoothie:", max_chars=100)
 st.write("The name on your smoothie will be: ", name_on_order)
 
-my_dataframe = session.table("zenas_athleisure_db.products.catalog_for_website") #.select(col('FRUIT_NAME'), col('search_on'))
+my_dataframe = st.dataframe("zenas_athleisure_db.products.catalog_for_website") #.select(col('FRUIT_NAME'), col('search_on'))
 
-pd_df = my_dataframe.to_pandas()
+# pd_df = my_dataframe.to_pandas()
 # st.dataframe(pd_df)
 st.stop()
 #
