@@ -26,11 +26,11 @@ if color_select:
 
     color_df = pd_df.loc[pd_df['COLOR_OR_STYLE'] == color_select, :]#.iloc[0]
     # st.dataframe(color_df)
-    # st.image(color_df['FILE_URL'], caption=f"Warm Comfortable {color_select} sweatsuit.")
+    st.image(color_df['FILE_URL'].values[0], caption=f"Warm Comfortable {color_select} sweatsuit.")
     st.write(f"""
-    Price: {color_df['PRICE'].values[0]}
-    Sizes Available: {color_df['SIZE_LIST'].values[0]}
-    \nBONUS: {color_df['UPSELL_PRODUCT_DESC']}
+    Price: {color_df['PRICE'].values[0]}\n
+    Sizes Available: {color_df['SIZE_LIST'].values[0]}\n
+    BONUS: {color_df['UPSELL_PRODUCT_DESC'].values[0]}
     """)
 
 
