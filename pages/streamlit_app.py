@@ -28,8 +28,8 @@ if color_select:
     # st.dataframe(color_df)
     # st.image(color_df['FILE_URL'], caption=f"Warm Comfortable {color_select} sweatsuit.")
     st.write(f"""
-    Price: {color_df['FILE_URL']}
-    Sizes Available: {color_df['SIZE_LIST']}
+    Price: {color_df['PRICE'].values[0]}
+    Sizes Available: {color_df['SIZE_LIST'].values[0]}
     \nBONUS: {color_df['UPSELL_PRODUCT_DESC']}
     """)
 
