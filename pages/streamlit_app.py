@@ -21,11 +21,11 @@ color_select = st.selectbox("Pick a sweatsuit color or style", prod_table.select
 # TODO: create dataframe and pandas frame that can be used to extract the table catalog_for_website
 
 if color_select:
-    # color_df = pd_df.loc[pd_df['color_or_style'] == color_select, :].iloc[0]
-    
     st.subheader(f'Product Info for {color_select} color')
-    # st.dataframe(color_df)
     st.dataframe(pd_df)
+
+    color_df = pd_df.loc[pd_df['COLOR_OR_STYLE'] == color_select, :].iloc[0]
+    st.dataframe(color_df)
     # st.image(color_df['file_url'])
     # search_on = pd_df.loc[pd_df['color_or_style'] == color_select, 'file_name'].iloc[0]
 #     st.write(f'The search value {color_select} is {search_on}')
