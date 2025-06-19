@@ -24,8 +24,8 @@ if color_select:
     st.subheader(f'Product Info for {color_select} color')
     st.dataframe(pd_df)
 
-    color_df = pd_df.loc[pd_df['COLOR_OR_STYLE'] == color_select, :].iloc[0]
-    st.dataframe(color_df)
+    # color_df = pd_df.loc[pd_df['COLOR_OR_STYLE'] == color_select, :].iloc[0]
+    # st.dataframe(color_df)
     # st.image(color_df['file_url'])
     # search_on = pd_df.loc[pd_df['color_or_style'] == color_select, 'file_name'].iloc[0]
 #     st.write(f'The search value {color_select} is {search_on}')
