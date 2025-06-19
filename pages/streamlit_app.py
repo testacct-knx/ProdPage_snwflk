@@ -11,22 +11,23 @@ session = cnx.session()
 
 # Write directly to the app
 st.title("Zena's Amazing Athleisure Catalog")
-# st.write(
-#   "Pick a sweatsuit color or style"
-# )
 
-# sweatsuit_color = st.text_input("Pick a sweatsuit color or style", max_chars=100)
 prod_table = session.table("zenas_athleisure_db.products.catalog_for_website")#.select(col('color_or_style'), col('file_name')) 
+pd_df = prod_table.to_pandas()
 
 color_select = st.selectbox("Pick a sweatsuit color or style", prod_table.select(col('color_or_style')))
 # session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'), col('search_on'))
 
 # TODO: create dataframe and pandas frame that can be used to extract the table catalog_for_website
 
-pd_df = prod_table.to_pandas()
-# if sweatsuit_color:
-#     search_on = pd_df.loc[pd_df['color_or_style'] == sweatsuit_color, 'file_name'].iloc[0]
-#     st.write(f'The search value {sweatsuit_color} is {search_on}')
+if color_select:
+    color_df = pd_df.loc[pd_df['color_or_style'] == color_select, :].iloc[0]
+    
+    st.subheader(f'Product Info for {color_select} color')
+    st.dataframe(color_df)
+    st.image(color_df['file_url'])
+    # search_on = pd_df.loc[pd_df['color_or_style'] == color_select, 'file_name'].iloc[0]
+#     st.write(f'The search value {color_select} is {search_on}')
 
 
 # TODO: Create input box to search for colors at catalog_for_website.color_or_style
@@ -67,8 +68,8 @@ st.stop()
 # # st.stop()
 #     # st.write(ingredients_string)
 # #
-#     my_insert_stmt = """ insert into smoothies.public.orders(ingredients, sweatsuit_color)
-#             values ('""" + ingredients_string + """', '""" + sweatsuit_color + """')"""
+#     my_insert_stmt = """ insert into smoothies.public.orders(ingredients, color_select)
+#             values ('""" + ingredients_string + """', '""" + color_select + """')"""
 #
 #     # st.write(my_insert_stmt)
 #     ###
@@ -76,5 +77,5 @@ st.stop()
 #     if time_to_insert:
 #         session.sql(my_insert_stmt).collect()
 #
-#         st.success(f"Your Smoothie is ordered, {sweatsuit_color}!", icon="✅")
+#         st.success(f"Your Smoothie is ordered, {color_select}!", icon="✅")
 
