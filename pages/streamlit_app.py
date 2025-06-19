@@ -25,10 +25,13 @@ if color_select:
 
 
     color_df = pd_df.loc[pd_df['COLOR_OR_STYLE'] == color_select, :]#.iloc[0]
-    st.dataframe(color_df)
-    # st.image(color_df['file_url'])
-    # search_on = pd_df.loc[pd_df['color_or_style'] == color_select, 'file_name'].iloc[0]
-#     st.write(f'The search value {color_select} is {search_on}')
+    # st.dataframe(color_df)
+    st.image(color_df['FILE_URL'], caption=f"Warm Comfortable {color_select} sweatsuit.")
+    st.write(f"""
+    Price: {color_df['FILE_URL']}
+    Sizes Available: {color_df['SIZE_LIST']}
+    \nBONUS: {color_df['UPSELL_PRODUCT_DESC']}
+    """)
 
 
 # TODO: Create input box to search for colors at catalog_for_website.color_or_style
