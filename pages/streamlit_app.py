@@ -1,5 +1,8 @@
 # Import python packages
 import streamlit as st
+from snowflake.snowpark.functions import col
+# import requests
+
 
 cnx = st.connection("snowflake")
 session = cnx.session()
@@ -12,16 +15,18 @@ st.title("Zena's Amazing Athleisure Catalog")
 #   "Pick a sweatsuit color or style"
 # )
 
-sweatsuit_color = st.text_input("Pick a sweatsuit color or style", max_chars=100)
-prod_table = session.table("zenas_athleisure_db.products.catalog_for_website")#.select(col(''), col('search_on'))) 
+# sweatsuit_color = st.text_input("Pick a sweatsuit color or style", max_chars=100)
+prod_table = session.table("zenas_athleisure_db.products.catalog_for_website")#.select(col('color_or_style'), col('file_name')) 
+
+color_select = st.selectbox("Pick a sweatsuit color or style", prod_table.select(col('color_or_style')))
 # session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'), col('search_on'))
 
 # TODO: create dataframe and pandas frame that can be used to extract the table catalog_for_website
 
 pd_df = prod_table.to_pandas()
-if sweatsuit_color:
-    search_on = pd_df.loc[pd_df['color_or_style'] == sweatsuit_color, 'file_name'].iloc[0]
-    st.write(f'The search value {sweatsuit_color} is {search_on}')
+# if sweatsuit_color:
+#     search_on = pd_df.loc[pd_df['color_or_style'] == sweatsuit_color, 'file_name'].iloc[0]
+#     st.write(f'The search value {sweatsuit_color} is {search_on}')
 
 
 # TODO: Create input box to search for colors at catalog_for_website.color_or_style
