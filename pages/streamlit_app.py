@@ -11,12 +11,11 @@ session = cnx.session()
 st.title("Zena's Amazing Athleisure Catalog")
 
 prod_table = session.table("zenas_athleisure_db.products.catalog_for_website")#.select(col('color_or_style'), col('file_name')) 
-pd_df = prod_table.to_pandas()
-
 color_select = st.selectbox("Pick a sweatsuit color or style", prod_table.select(col('color_or_style')))
 
-
 if color_select:
+    # Create dataframe, select color, return results
+    pd_df = prod_table.to_pandas()
     st.subheader(f'Product Info for {color_select} color')
 
 
